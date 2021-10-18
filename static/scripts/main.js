@@ -41,3 +41,15 @@ $('a.smooth-scroll')
     }
   }
 });
+
+function myfunction_events() { 
+  document.getElementById('myDiv').innerHTML = "Events and other participations";
+}
+
+function myfunction_courses() { 
+  document.getElementById('myDiv').innerHTML = "Extra courses";
+}
+
+function myfunction_interest() { 
+  document.getElementById('myDiv').innerHTML = "Interests and hobbies";
+}

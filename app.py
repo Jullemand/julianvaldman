@@ -31,10 +31,10 @@ TODOs
 
 '''
 
-
-from email.mime.text import MIMEText
-import smtplib
-from email.message import EmailMessage
+from mail import Mail
+# from email.mime.text import MIMEText
+# import smtplib
+# from email.message import EmailMessage
 from flask import Flask, render_template, request, url_for, redirect
 
 def create_app():
@@ -56,32 +56,15 @@ def create_app():
             email = request.form['_replyto']
             message = request.form['message']
 
-            your_name = "Julian Valdman"
-            your_email = "julian.val123@gmail.com"
-            your_password = "valdman11"
+            mail = Mail()
+            res = mail.send_contact_mail({
+                "name": name,
+                "subject": subject,
+                "email": email,
+                "message": message
+            })
+            print(res)
 
-            # Logging in to our email account
-            server = smtplib.SMTP('smtp.gmail.com', 587)
-            server.ehlo()
-            server.starttls()
-            server.login(your_email, your_password)
-
-            # Sender's and Receiver's email address
-            sender_email = "julian.val123@gmail.com"
-            receiver_email = "julian_1108@hotmail.com"
-
-            msg = EmailMessage()
-            msg.set_content("First Name : "+str(name)+"\nEmail : "+str(email)+"\nSubject : "+str(subject)+"\nMessage : "+str(message))
-            msg['Subject'] = 'New Response on Personal Website'
-            msg['From'] = sender_email
-            msg['To'] = receiver_email
-            # Send the message via our own SMTP server.
-            try:
-                # sending an email
-                server.send_message(msg)
-            except:
-                pass
-        
         return redirect('/#contact');
 
     return app

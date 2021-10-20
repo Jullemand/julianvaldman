@@ -43,7 +43,7 @@ $('a.smooth-scroll')
 });
 
 function myfunction_events() { 
-  document.getElementById('myDiv').innerHTML = "Events and other participations";
+  document.getElementById('myDiv').innerHTML = "Events and participations";
 }
 
 function myfunction_courses() { 

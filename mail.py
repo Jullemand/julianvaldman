@@ -1,13 +1,13 @@
 from types import LambdaType
 import requests
+import os
 
 class Mail():
 
     def __init__(self) -> None:
-        self.domain_name = "sandbox2e7b8ad2e9034b0980ec7978af638425.mailgun.org"
-        self.test_domain_name = "samples.mailgun.org"
-        # self.api_key = "2bf328a5-f42f3eb0"
-        self.api_key = "120798de5eac5cc2a0a2cd6d7d0c8151-2bf328a5-f42f3eb0"
+        self.domain_name = os.environ.get("MAILGUN_DOMAIN")
+        self.api_key = os.environ.get("MAILGUN_API")
+        self.mail_receiver = ["julian_1108@hotmail.com"]
 
     def send_simple_message(self):
 
@@ -17,7 +17,7 @@ class Mail():
             f"https://api.mailgun.net/v3/{self.domain_name}/messages",
             auth=("api", self.api_key),
             data={"from": f"Portfolio Page <mailgun@{self.domain_name}>",
-                "to": ["julian_1108@hotmail.com"],
+                "to": self.mail_receiver,
                 "subject": "Hello",
                 "text": "Testing some Mailgun awesomness!"})
 
@@ -39,12 +39,15 @@ Message :  {str(message)}
             f"https://api.mailgun.net/v3/{self.domain_name}/messages",
             auth=("api", self.api_key),
             data={  "from": f"Portfolio Page <mailgun@{self.domain_name}>",
-                    "to": ["julian_1108@hotmail.com"],
+                    "to": self.mail_receiver,
                     "subject": "Contact",
                     "text": text})
 
 
 if __name__ == "__main__":
+
+    a = os.environ.get("MAILGUN_API")
+    print(a)
 
     mail = Mail()
     res = mail.send_simple_message()

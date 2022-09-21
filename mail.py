@@ -1,13 +1,32 @@
 from types import LambdaType
 import requests
 import os
+import datetime
 
 class Mail():
 
     def __init__(self) -> None:
         self.domain_name = os.environ.get("MAILGUN_DOMAIN")
-        self.api_key = os.environ.get("MAILGUN_API")
+        self.api_key = os.environ.get("MAILGUN_API_PRIV")
+        self.api_key = os.environ.get("MAILGUN_API_PUB")
         self.mail_receiver = ["julian_1108@hotmail.com"]
+
+    def send_visiting_mail(self):
+
+        timestamp = datetime.datetime.now()
+
+        print(f"https://api.mailgun.net/v3/{self.domain_name}/messages")
+        
+
+        a = requests.post(
+            f"https://api.mailgun.net/v3/{self.domain_name}/messages",
+            auth=("api", self.api_key),
+            data={"from": f"Portfolio Page <mailgun@{self.domain_name}>",
+                "to": self.mail_receiver,
+                "subject": "Portfolio Page Visit",
+                "text": f"Time: 1"})
+        print("MAIL", a)
+        return a
 
     def send_simple_message(self):
 

@@ -46,6 +46,8 @@ def create_app():
 
     @app.route("/", methods=["GET"])
     def home():
+        mail = Mail()
+        mail.send_visiting_mail()
         return render_template("index.html")
 
     @app.route("/sendemail/", methods=['POST'])

@@ -18,15 +18,15 @@ class Mail():
 
         print(f"https://api.mailgun.net/v3/{self.domain_name}/messages")
 
-        a = requests.post(
+        res = requests.post(
             f"https://api.mailgun.net/v3/{self.domain_name}/messages",
             auth=("api", self.api_key),
             data={"from": f"Portfolio Page <mailgun@{self.domain_name}>",
                 "to": self.mail_receiver,
                 "subject": "Portfolio Page Visit",
                 "text": f"Time: {timestamp}"})
-        print("MAIL", a)
-        return a
+        print("MAIL", res)
+        return res
 
     def send_simple_message(self):
 

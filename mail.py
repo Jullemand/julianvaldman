@@ -3,6 +3,7 @@ import requests
 import os
 import datetime
 
+
 class Mail():
 
     def __init__(self) -> None:

@@ -8,7 +8,7 @@ class Mail():
     def __init__(self) -> None:
         self.domain_name = os.environ.get("MAILGUN_DOMAIN")
         self.api_key = os.environ.get("MAILGUN_API_PRIV")
-        self.api_key = os.environ.get("MAILGUN_API_PUB")
+        # self.api_key = os.environ.get("MAILGUN_API_PUB")
         self.mail_receiver = ["julian_1108@hotmail.com"]
 
     def send_visiting_mail(self):
@@ -16,7 +16,6 @@ class Mail():
         timestamp = datetime.datetime.now()
 
         print(f"https://api.mailgun.net/v3/{self.domain_name}/messages")
-        
 
         a = requests.post(
             f"https://api.mailgun.net/v3/{self.domain_name}/messages",
@@ -24,7 +23,7 @@ class Mail():
             data={"from": f"Portfolio Page <mailgun@{self.domain_name}>",
                 "to": self.mail_receiver,
                 "subject": "Portfolio Page Visit",
-                "text": f"Time: 1"})
+                "text": f"Time: {timestamp}"})
         print("MAIL", a)
         return a
 
